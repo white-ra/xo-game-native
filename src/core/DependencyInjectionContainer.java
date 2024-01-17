@@ -1,6 +1,9 @@
 package core;
 
+import controller.MainMenuPanelController;
+import core.exception.CreateInstanceException;
 import view.MainFrame;
+import view.panel.MenuPanel;
 
 public class DependencyInjectionContainer {
 
@@ -12,9 +15,11 @@ public class DependencyInjectionContainer {
 
     public void initInstance() {
         try {
-            this.serviceLocator.create(MainFrame.class);
+            serviceLocator.create(MenuPanel.class);
+            serviceLocator.create(MainMenuPanelController.class, serviceLocator.get(MenuPanel.class));
+            serviceLocator.create(MainFrame.class, serviceLocator.get(MenuPanel.class));
         } catch (ReflectiveOperationException reflectiveOperationException) {
-            System.out.println("pizdec");
+            throw new CreateInstanceException(reflectiveOperationException.getMessage());
         }
     }
 }
