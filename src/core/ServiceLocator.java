@@ -1,6 +1,6 @@
 package core;
 
-import model.exception.NoSuchInstanceException;
+import core.exception.NoSuchInstanceException;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
