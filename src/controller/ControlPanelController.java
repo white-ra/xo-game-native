@@ -16,7 +16,7 @@ public class ControlPanelController {
         this.game = gameInterface;
         this.xoCanvas = xoCanvas;
 
-        controlPanel.getRestartButton().addActionListener(this::restartAction);
+        this.controlPanel.getRestartButton().addActionListener(this::restartAction);
     }
 
     private void restartAction(ActionEvent e) {

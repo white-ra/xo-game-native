@@ -10,10 +10,6 @@ public class Map implements MapInterface {
         this.field[convertCoordinatesToIndex(xCoordinate, yCoordinate)] = playerMark;
     }
 
-    public PlayerMarkEnum[] getMapArray() {
-        return this.field;
-    }
-
     public boolean isSetMark(int xCoordinate, int yCoordinate) {
         return null != field[this.convertCoordinatesToIndex(xCoordinate, yCoordinate)];
     }

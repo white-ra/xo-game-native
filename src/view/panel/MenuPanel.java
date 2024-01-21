@@ -2,7 +2,6 @@ package view.panel;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class MenuPanel extends JPanel {

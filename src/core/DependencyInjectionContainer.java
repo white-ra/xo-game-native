@@ -13,7 +13,6 @@ import view.canvas.XOCanvas;
 import view.panel.*;
 
 public class DependencyInjectionContainer {
-
     private final ServiceLocator sL;
 
     public DependencyInjectionContainer(ServiceLocator serviceLocator) {

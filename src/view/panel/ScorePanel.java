@@ -19,7 +19,7 @@ public class ScorePanel extends JPanel implements ScorePanelInterface {
         this.scorePresenter = scorePresenter;
 
         playerX = new JLabel("Player X: ");
-        playerY = new JLabel("Player Y: ");
+        playerY = new JLabel("Player O: ");
 
         scoreCountX = new JLabel("0");
         scoreCountY = new JLabel("0");
