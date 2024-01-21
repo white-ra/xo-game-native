@@ -1,6 +1,5 @@
 package view;
 
-import view.canvas.XOCanvas;
 import view.panel.GameFieldPanel;
 import view.panel.MenuPanel;
 import view.panel.TitlePanel;
