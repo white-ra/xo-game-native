@@ -1,34 +1,24 @@
 package view.panel;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 
 public class MenuPanel extends JPanel {
-    private final JButton startGameButton = new JButton("Start");
-    private final JButton exitGameButton = new JButton("Exit");
+    private final ScorePanel scorePanel;
+    private final ControlPanel controlPanel;
 
-    public MenuPanel() {
-        GroupLayout groupLayout = new GroupLayout(this);
-        setLayout(groupLayout);
+    public MenuPanel(ScorePanel scorePanel, ControlPanel controlPanel) {
+        this.scorePanel = scorePanel;
+        this.controlPanel = controlPanel;
 
-        groupLayout.setAutoCreateGaps(true);
-        groupLayout.setAutoCreateContainerGaps(true);
+        GridLayout layout = new GridLayout(2, 1, 7, 7);
+        setLayout(layout);
 
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addComponent(startGameButton)
-                .addComponent(exitGameButton)
-        );
+        setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 
-        groupLayout.setVerticalGroup(groupLayout.createSequentialGroup()
-                .addComponent(startGameButton)
-                .addComponent(exitGameButton)
-        );
-    }
-
-    public JButton getStartGameButton() {
-        return startGameButton;
-    }
-
-    public JButton getExitGameButton() {
-        return exitGameButton;
+        add(this.scorePanel);
+        add(this.controlPanel);
     }
 }

@@ -1,10 +1,9 @@
 package model.entity;
 
-import model.enums.PlayerMarkEnum;
+import contract.entity.MapInterface;
+import contract.enums.PlayerMarkEnum;
 
-import java.util.HashMap;
-
-public class Map {
+public class Map implements MapInterface {
     private final PlayerMarkEnum[] field = new PlayerMarkEnum[9];
 
     public void setMark(PlayerMarkEnum playerMark, int xCoordinate, int yCoordinate) {
@@ -34,7 +33,7 @@ public class Map {
         return field;
     }
 
-    private int convertCoordinatesToIndex(int xCoordinate, int yCoordinate) {
+    private int convertCoordinatesToIndex(Integer xCoordinate, Integer yCoordinate) {
         return (yCoordinate - 1) * 3 + xCoordinate - 1;
     }
 }

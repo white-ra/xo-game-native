@@ -1,28 +1,51 @@
 package core;
 
-import controller.MainMenuPanelController;
+import controller.ControlPanelController;
+import controller.GameFieldPanelController;
+import controller.listener.SetMarkListener;
 import core.exception.CreateInstanceException;
 import model.Game;
 import model.factory.MapFactory;
+import presenter.MapPresenter;
+import presenter.ScorePresenter;
 import view.MainFrame;
-import view.panel.MenuPanel;
+import view.canvas.XOCanvas;
+import view.panel.*;
 
 public class DependencyInjectionContainer {
 
-    private final ServiceLocator serviceLocator;
+    private final ServiceLocator sL;
 
     public DependencyInjectionContainer(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
+        this.sL = serviceLocator;
     }
 
     public void initInstance() {
         try {
-            serviceLocator.create(MenuPanel.class);
-            serviceLocator.create(MainMenuPanelController.class, serviceLocator.get(MenuPanel.class));
-            serviceLocator.create(MainFrame.class, serviceLocator.get(MenuPanel.class));
+            sL.create(MapFactory.class);
+            sL.create(Game.class, sL.get(MapFactory.class));
 
-            serviceLocator.create(MapFactory.class);
-            serviceLocator.create(Game.class, serviceLocator.get(MapFactory.class));
+            sL.create(ScorePresenter.class, sL.get(Game.class));
+            sL.create(MapPresenter.class, sL.get(Game.class));
+
+            sL.create(XOCanvas.class, sL.get(MapPresenter.class));
+
+            sL.create(TitlePanel.class);
+            sL.create(ScorePanel.class, sL.get(ScorePresenter.class));
+            sL.create(ControlPanel.class);
+            sL.create(GameFieldPanel.class, sL.get(XOCanvas.class));
+            sL.create(MenuPanel.class, sL.get(ScorePanel.class), sL.get(ControlPanel.class));
+
+            sL.create(MainFrame.class, sL.get(TitlePanel.class), sL.get(MenuPanel.class), sL.get(GameFieldPanel.class));
+
+            sL.create(SetMarkListener.class, sL.get(Game.class), sL.get(XOCanvas.class), sL.get(ScorePanel.class));
+
+            sL.create(GameFieldPanelController.class, sL.get(GameFieldPanel.class), sL.get(SetMarkListener.class));
+            sL.create(
+                ControlPanelController.class,
+                sL.get(ControlPanel.class),
+                sL.get(Game.class),
+                sL.get(XOCanvas.class));
         } catch (ReflectiveOperationException reflectiveOperationException) {
             throw new CreateInstanceException(reflectiveOperationException.getMessage());
         }
