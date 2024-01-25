@@ -1,8 +1,10 @@
-import core.DependencyInjectionContainer;
-import core.ServiceLocator;
+import core.di.DependencyInjectionContainer;
+import core.di.ServiceLocator;
 
 public class Main {
     public static void main(String[] args) {
-        new DependencyInjectionContainer(new ServiceLocator()).initInstance();
+        DependencyInjectionContainer dependencyInjectionContainer = new DependencyInjectionContainer();
+        dependencyInjectionContainer.configureFromJavaInstanceConfiguration(new InstancesConfiguration());
+        dependencyInjectionContainer.initInstances();
     }
 }
