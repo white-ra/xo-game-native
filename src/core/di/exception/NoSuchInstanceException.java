@@ -1,4 +1,4 @@
-package core.exception;
+package core.di.exception;
 
 public class NoSuchInstanceException extends RuntimeException {
     public <T> NoSuchInstanceException(Class<T> clazz) {
