@@ -1,3 +1,5 @@
+package instances_configuration;
+
 import controller.ControlPanelController;
 import controller.GameFieldPanelController;
 import controller.listener.SetMarkListener;

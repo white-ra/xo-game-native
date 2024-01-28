@@ -1,5 +1,5 @@
 import core.di.DependencyInjectionContainer;
-import core.di.ServiceLocator;
+import instances_configuration.InstancesConfiguration;
 
 public class Main {
     public static void main(String[] args) {
