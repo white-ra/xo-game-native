@@ -3,8 +3,8 @@ out/
 /target/
 !**/src/main/**/out/
 !**/src/test/**/out/
-/xo-game-native.iml
-
+xo-game-native.iml
+.idea
 
 ### Eclipse ###
 .apt_generated
