@@ -20,7 +20,7 @@ public class ControlPanelController {
     }
 
     private void restartAction(ActionEvent e) {
-        game.restart();
+        game.restartGame();
         xoCanvas.repaint();
     }
 }
