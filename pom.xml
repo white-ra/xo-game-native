@@ -10,15 +10,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>white-ra</groupId>
             <artifactId>simple-io-container</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
     </dependencies>
 

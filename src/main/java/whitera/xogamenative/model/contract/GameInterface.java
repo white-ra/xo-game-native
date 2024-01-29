@@ -8,7 +8,7 @@ public interface GameInterface {
 
     ScoreInterface getScore();
 
-    void restart();
+    void restartGame();
 
     void doTurn(Integer xCoordinate, Integer yCoordinate);
 }

@@ -1,5 +1,6 @@
 package whitera.xogamenative.configuration;
 
+import whitera.simpleiocontainer.contract.JavaInstanceConfigurationInterface;
 import whitera.xogamenative.controller.ControlPanelController;
 import whitera.xogamenative.controller.GameFieldPanelController;
 import whitera.xogamenative.controller.listener.SetMarkListener;
@@ -14,7 +15,6 @@ import whitera.xogamenative.view.panel.GameFieldPanel;
 import whitera.xogamenative.view.panel.MenuPanel;
 import whitera.xogamenative.view.panel.ScorePanel;
 import whitera.xogamenative.view.panel.TitlePanel;
-import whitera.simpleiocontainer.contract.JavaInstanceConfigurationInterface;
 
 import java.util.LinkedHashMap;
 

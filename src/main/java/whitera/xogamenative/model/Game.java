@@ -61,11 +61,6 @@ public class Game implements GameInterface {
         return score;
     }
 
-    @Override
-    public void restart() {
-        restartGame();
-    }
-
     private void switchPlayerTurn() {
         playerTurn = playerTurn == PlayerMarkEnum.X ? PlayerMarkEnum.O : PlayerMarkEnum.X;
     }
