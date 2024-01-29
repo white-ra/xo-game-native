@@ -1,5 +1,5 @@
-import core.di.DependencyInjectionContainer;
-import instances_configuration.InstancesConfiguration;
+import instances.configuration.InstancesConfiguration;
+import white.ra.simple.io.container.DependencyInjectionContainer;
 
 public class Main {
     public static void main(String[] args) {

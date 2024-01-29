@@ -15,6 +15,11 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>white-ra</groupId>
+            <artifactId>simple-io-container</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>

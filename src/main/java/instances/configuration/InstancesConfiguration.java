@@ -1,9 +1,8 @@
-package instances_configuration;
+package instances.configuration;
 
 import controller.ControlPanelController;
 import controller.GameFieldPanelController;
 import controller.listener.SetMarkListener;
-import core.di.contract.JavaInstanceConfigurationInterface;
 import model.Game;
 import model.factory.MapFactory;
 import presenter.MapPresenter;
@@ -11,6 +10,7 @@ import presenter.ScorePresenter;
 import view.MainFrame;
 import view.canvas.XOCanvas;
 import view.panel.*;
+import white.ra.simple.io.container.contract.JavaInstanceConfigurationInterface;
 
 import java.util.LinkedHashMap;
 
