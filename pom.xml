@@ -8,6 +8,20 @@
     <artifactId>xo-game-native</artifactId>
     <version>1.1</version>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub white-ra Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/white-ra/simple-io-container</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -24,8 +38,7 @@
         <dependency>
             <groupId>white-ra</groupId>
             <artifactId>simple-io-container</artifactId>
-            <version>1.1</version>
+            <version>1.1.0</version>
         </dependency>
     </dependencies>
-
 </project>
