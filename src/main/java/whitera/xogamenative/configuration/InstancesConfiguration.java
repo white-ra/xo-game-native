@@ -10,11 +10,7 @@ import whitera.xogamenative.presenter.MapPresenter;
 import whitera.xogamenative.presenter.ScorePresenter;
 import whitera.xogamenative.view.MainFrame;
 import whitera.xogamenative.view.canvas.XOCanvas;
-import whitera.xogamenative.view.panel.ControlPanel;
-import whitera.xogamenative.view.panel.GameFieldPanel;
-import whitera.xogamenative.view.panel.MenuPanel;
-import whitera.xogamenative.view.panel.ScorePanel;
-import whitera.xogamenative.view.panel.TitlePanel;
+import whitera.xogamenative.view.panel.*;
 
 import java.util.LinkedHashMap;
 
@@ -35,12 +31,16 @@ public class InstancesConfiguration implements JavaInstanceConfigurationInterfac
         iC.put(ScorePanel.class, new Class<?>[]{ScorePresenter.class});
         iC.put(ControlPanel.class, null);
         iC.put(GameFieldPanel.class, new Class<?>[]{XOCanvas.class});
-        iC.put(MenuPanel.class, new Class<?>[]{ScorePanel.class, ControlPanel.class});
+        iC.put(EventPanel.class, null);
+        iC.put(MenuPanel.class, new Class<?>[]{ScorePanel.class, ControlPanel.class, EventPanel.class});
 
         iC.put(MainFrame.class, new Class<?>[]{TitlePanel.class, MenuPanel.class, GameFieldPanel.class});
 
-        iC.put(SetMarkListener.class, new Class<?>[]{Game.class, XOCanvas.class, ScorePanel.class});
-        iC.put(ControlPanelController.class, new Class<?>[]{ControlPanel.class, Game.class, XOCanvas.class});
+        iC.put(SetMarkListener.class, new Class<?>[]{Game.class, XOCanvas.class, ScorePanel.class, EventPanel.class});
+        iC.put(
+            ControlPanelController.class,
+            new Class<?>[]{ControlPanel.class, Game.class, XOCanvas.class, EventPanel.class}
+        );
         iC.put(GameFieldPanelController.class, new Class<?>[]{GameFieldPanel.class, SetMarkListener.class});
 
         return iC;

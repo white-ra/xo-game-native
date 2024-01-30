@@ -1,6 +1,6 @@
 package whitera.xogamenative.view.canvas;
 
-import whitera.xogamenative.contract.constant.XOCanvasConst;
+import whitera.xogamenative.contract.constant.GameFieldPanelConst;
 import whitera.xogamenative.contract.enums.PlayerMarkEnum;
 import whitera.xogamenative.presenter.MapPresenterInterface;
 import whitera.xogamenative.view.contract.XOCanvasInterface;
@@ -15,7 +15,7 @@ public class XOCanvas extends Canvas implements XOCanvasInterface {
     public XOCanvas(MapPresenterInterface mapPresenter) {
         this.mapPresenter = mapPresenter;
 
-        setSize(XOCanvasConst.WIDTH, XOCanvasConst.HEIGHT);
+        setSize(GameFieldPanelConst.WIDTH, GameFieldPanelConst.HEIGHT);
     }
 
     @Override
