@@ -1,10 +1,10 @@
 package whitera.xogamenative.model;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import whitera.xogamenative.contract.enums.EventEnum;
 import whitera.xogamenative.contract.enums.PlayerMarkEnum;
 import whitera.xogamenative.model.entity.Map;
 import whitera.xogamenative.model.entity.Score;
@@ -25,20 +25,19 @@ class GameTest {
     }
 
     @Test
-    void doTurnWhenMarkSetted() {
+    void doTurnWhenMarkSettedAndReturnMarkSettedEvent() {
         Mockito.when(mapMock.isSetMark(1, 1)).thenReturn(true);
 
-        game.doTurn(1, 1);
-
+        Assertions.assertEquals(EventEnum.CELL_IS_ALREADY_OCCUPIED, game.doTurn(1, 1));
         Mockito.verify(mapMock, Mockito.times(1)).isSetMark(1, 1);
     }
 
     @Test
-    void doTurnWhenMarkNotSettedAndXPlayerNotWin() {
+    void doTurnWhenPlayerXNotWinAndReturnPlayerOTurnEvent() {
         Mockito.when(mapMock.isSetMark(1, 1)).thenReturn(false);
         Mockito.when(mapMock.isPlayerWin(PlayerMarkEnum.X)).thenReturn(false);
 
-        game.doTurn(1, 1);
+        EventEnum event = game.doTurn(1, 1);
 
         Mockito.verify(mapMock, Mockito.times(1))
             .isSetMark(1, 1);
@@ -47,16 +46,17 @@ class GameTest {
         Mockito.verify(mapMock, Mockito.times(1))
             .isPlayerWin(PlayerMarkEnum.X);
 
+        Assertions.assertEquals(EventEnum.PLAYER_O_TURN, event);
         Assertions.assertEquals(0, game.getScore().getXPlayer());
         Assertions.assertEquals(0, game.getScore().getOPlayer());
     }
 
     @Test
-    void doTurnWhenMarkNotSettedAndXPlayerWin() {
+    void doTurnWhenPlayerXWinAndReturnXPlayerWinEvent() {
         Mockito.when(mapMock.isSetMark(1, 1)).thenReturn(false);
         Mockito.when(mapMock.isPlayerWin(PlayerMarkEnum.X)).thenReturn(true);
 
-        game.doTurn(1, 1);
+        EventEnum event = game.doTurn(1, 1);
 
         Mockito.verify(mapMock, Mockito.times(1))
             .isSetMark(1, 1);
@@ -65,14 +65,34 @@ class GameTest {
         Mockito.verify(mapMock, Mockito.times(1))
             .isPlayerWin(PlayerMarkEnum.X);
 
+        Assertions.assertEquals(EventEnum.PLAYER_X_WIN, event);
+        Assertions.assertEquals(1, game.getScore().getXPlayer());
+        Assertions.assertEquals(0, game.getScore().getOPlayer());
+    }
+
+    @Test
+    void doTurnWhenPlayerXWinAndReturnsGameEndEvent() {
+        Mockito.when(mapMock.isSetMark(1, 1)).thenReturn(false);
+        Mockito.when(mapMock.isPlayerWin(PlayerMarkEnum.X)).thenReturn(true);
+
+        game.doTurn(1, 1);
+        EventEnum event = game.doTurn(1, 2);
+
+        Mockito.verify(mapMock, Mockito.times(1))
+            .isSetMark(1, 1);
+        Mockito.verify(mapMock, Mockito.times(1))
+            .setMark(PlayerMarkEnum.X, 1, 1);
+        Mockito.verify(mapMock, Mockito.times(1))
+            .isPlayerWin(PlayerMarkEnum.X);
+
+        Assertions.assertEquals(EventEnum.GAME_END, event);
         Assertions.assertEquals(1, game.getScore().getXPlayer());
         Assertions.assertEquals(0, game.getScore().getOPlayer());
     }
 
     @Test
     void restartGame() {
-        game.restartGame();
-
+        Assertions.assertEquals(EventEnum.GAME_START, game.restartGame());
         Assertions.assertEquals(mapMock, game.getMap());
     }
 

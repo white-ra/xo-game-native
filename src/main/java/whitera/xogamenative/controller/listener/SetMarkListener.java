@@ -1,7 +1,9 @@
 package whitera.xogamenative.controller.listener;
 
-import whitera.xogamenative.contract.constant.XOCanvasConst;
+import whitera.xogamenative.contract.constant.GameFieldPanelConst;
+import whitera.xogamenative.contract.enums.EventEnum;
 import whitera.xogamenative.model.contract.GameInterface;
+import whitera.xogamenative.view.contract.EventPanelInterface;
 import whitera.xogamenative.view.contract.ScorePanelInterface;
 import whitera.xogamenative.view.contract.XOCanvasInterface;
 
@@ -12,22 +14,30 @@ public class SetMarkListener implements MouseListener {
     private final GameInterface game;
     private final XOCanvasInterface xoCanvas;
     private final ScorePanelInterface scorePanel;
+    private final EventPanelInterface eventPanel;
 
-    public SetMarkListener(GameInterface game, XOCanvasInterface xoCanvas, ScorePanelInterface scorePanel) {
+    public SetMarkListener(
+        GameInterface game,
+        XOCanvasInterface xoCanvas,
+        ScorePanelInterface scorePanel,
+        EventPanelInterface eventPanel
+    ) {
         this.game = game;
         this.xoCanvas = xoCanvas;
         this.scorePanel = scorePanel;
+        this.eventPanel = eventPanel;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        game.doTurn(
+        EventEnum event = game.doTurn(
             covertMouseXPositionToXCoordinate(e.getX()),
             covertMouseYPositionToYCoordinate(e.getY())
         );
 
         scorePanel.updateScore();
         xoCanvas.repaint();
+        eventPanel.setEvent(event);
     }
 
     @Override
@@ -51,10 +61,10 @@ public class SetMarkListener implements MouseListener {
     }
 
     private Integer covertMouseXPositionToXCoordinate(Integer mouseXPosition) {
-        return (int) Math.ceil((double) mouseXPosition / ((double) XOCanvasConst.WIDTH / 3));
+        return (int) Math.ceil((double) mouseXPosition / ((double) GameFieldPanelConst.WIDTH / 3));
     }
 
     private Integer covertMouseYPositionToYCoordinate(Integer mouseYPosition) {
-        return (int) Math.ceil((double) mouseYPosition / ((double) XOCanvasConst.HEIGHT / 3));
+        return (int) Math.ceil((double) mouseYPosition / ((double) GameFieldPanelConst.HEIGHT / 3));
     }
 }

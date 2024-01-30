@@ -6,6 +6,7 @@ import whitera.xogamenative.model.contract.GameInterface;
 import whitera.xogamenative.model.entity.Map;
 import whitera.xogamenative.model.entity.Score;
 import whitera.xogamenative.contract.enums.PlayerMarkEnum;
+import whitera.xogamenative.contract.enums.EventEnum;
 import whitera.xogamenative.model.factory.MapFactory;
 
 public class Game implements GameInterface {
@@ -22,15 +23,13 @@ public class Game implements GameInterface {
         restartGame();
     }
 
-    public void doTurn(Integer xCoordinate, Integer yCoordinate) {
+    public EventEnum doTurn(Integer xCoordinate, Integer yCoordinate) {
         if (isGameEnd) {
-            System.out.println("Restart game");
-            return;
+            return EventEnum.GAME_END;
         }
 
         if (map.isSetMark(xCoordinate, yCoordinate)) {
-            System.out.println("Field is set");
-            return;
+            return EventEnum.CELL_IS_ALREADY_OCCUPIED;
         }
 
         map.setMark(playerTurn, xCoordinate, yCoordinate);
@@ -38,17 +37,21 @@ public class Game implements GameInterface {
         if (map.isPlayerWin(playerTurn)) {
             isGameEnd = true;
             score.increase(playerTurn);
-            System.out.printf("Player %s win%n", playerTurn);
-            return;
+
+            return playerTurn == PlayerMarkEnum.X ? EventEnum.PLAYER_X_WIN : EventEnum.PLAYER_O_WIN;
         }
 
         switchPlayerTurn();
+
+        return playerTurn == PlayerMarkEnum.X ? EventEnum.PLAYER_X_TURN : EventEnum.PLAYER_O_TURN;
     }
 
-    public void restartGame() {
+    public EventEnum restartGame() {
         map = this.mapFactory.create();
         playerTurn = PlayerMarkEnum.X;
         isGameEnd = false;
+
+        return EventEnum.GAME_START;
     }
 
     @Override

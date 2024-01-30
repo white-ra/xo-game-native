@@ -8,35 +8,36 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScorePanel extends JPanel implements ScorePanelInterface {
+    private static final Integer WIDTH = MenuPanel.WIDTH;
+    private static final String PLAYER_SCORE_TEMPLATE = "Player %s: %d";
+
     private final ScorePresenterInterface scorePresenter;
 
-    private final JLabel playerX;
-    private final JLabel playerY;
     private final JLabel scoreCountX;
-    private final JLabel scoreCountY;
+    private final JLabel scoreCountO;
 
     public ScorePanel(ScorePresenterInterface scorePresenter) {
         this.scorePresenter = scorePresenter;
 
-        playerX = new JLabel("Player X: ");
-        playerY = new JLabel("Player O: ");
+        scoreCountX = new JLabel();
+        scoreCountO = new JLabel();
 
-        scoreCountX = new JLabel("0");
-        scoreCountY = new JLabel("0");
-
-        GridLayout layout = new GridLayout(2, 2, 0, 0);
+        GridLayout layout = new GridLayout(2, 1, 0, 0);
         setLayout(layout);
 
-        add(playerX);
         add(scoreCountX);
-        add(playerY);
-        add(scoreCountY);
+        add(scoreCountO);
+
+        updateScore();
+
+        int leftBorder = (WIDTH / 2 - scoreCountX.getFont().getSize() * scoreCountX.getText().length() / 4);
+        setBorder(BorderFactory.createEmptyBorder(0, leftBorder, 0, 0));
     }
 
     public void updateScore() {
         ScoreInterface score = scorePresenter.getScore();
 
-        scoreCountX.setText(String.valueOf(score.getXPlayer()));
-        scoreCountY.setText(String.valueOf(score.getOPlayer()));
+        scoreCountX.setText(PLAYER_SCORE_TEMPLATE.formatted("X", score.getXPlayer()));
+        scoreCountO.setText(PLAYER_SCORE_TEMPLATE.formatted("O", score.getOPlayer()));
     }
 }
